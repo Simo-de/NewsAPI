@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<script>
+    function getnews() {
+
+    var sprache = document.getElementById("lang").value;
+    var kategorie = document.getElementById("cat").value;
+    var stichwort= document.getElementById("q").value;
+    var API_KEY = 'b7930e3ba4a94d1e958a06d0aab63fb3';    //insert your API_Key here
+
+    if( kategorie &&sprache && !stichwort){
+        var url = 'https://newsapi.org/v2/top-headlines?language=' + sprache +'&category=' + kategorie +'&apiKey=' + API_KEY;;
+    }
+    else if(!kategorie && !sprache && stichwort){
+        var url = 'https://newsapi.org/v2/top-headlines?q=' + stichwort + '&apiKey=' + API_KEY;
+        
+    }else if(!kategorie && sprache && !stichwort){
+        var url = 'https://newsapi.org/v2/top-headlines?language=' + sprache + '&apiKey=' + API_KEY;
+    }
+    else{
+        alert("bitte ändere deine Parameter");
+    }
+  
+    
+    fetch(url) 
+    .then(response => response.json()) 
+    .then(data => {
+        document.getElementById("output").innerHTML = null;
+        if(data.articles.length == 0 ){
+            alert("keine Daten gefunden");
+        }
+        for(var i=0; i<data.articles.length; i++){
+            document.getElementById("output").innerHTML +=
+            "<div style='padding-top: 20px;'><h1>"
+                +data.articles[i].title+"</h1>"+"<a href="+data.articles[i].url+">Link zum Artikel</a>"+"<br>"+data.articles[i].author+"<br>"+data.articles[i].publishedAt+
+            "</div>";                           
+                        
+        }
+        
+    }) 
+    .catch(error => {
+        console.log(error);
+    }) 
+    }
+   
+</script>
+
+<head>
+    
+        <div>
+            <label>Sprache</label>
+            <select id="lang" multiple>
+                <option value="de">deutsch</option>
+                <option value="en">englisch</option>
+            </select>
+        </div>
+        <div>
+            <label>Kategorie</label>
+            <select id="cat" multiple>
+                <option value="technology">Technologie</option>
+                <option value="business">Finanzen</option>
+            </select>
+        </div>
+        <div>
+            <label>Stichwort</label>
+            <input id="q">
+        </div>
+        <button onclick="getnews()">Suchen</button>
+    
+</head>
+<body>
+    <div id="output"></div>
+</body>
+
+
