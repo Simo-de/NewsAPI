@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+
 <script>
     function getnews() {
 
@@ -17,7 +21,7 @@
         var url = 'https://newsapi.org/v2/top-headlines?language=' + sprache + '&apiKey=' + API_KEY;
     }
     else{
-        alert("bitte ändere deine Parameter");
+        alert("Bitte ändere deine Parameter. Stichwörter müssen ohne Kategorie und Sprache eingegeben werden.");
     }
   
     
@@ -44,31 +48,95 @@
    
 </script>
 
-<head>
+<style>
+
+
+
+#Abfrage {
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+    width: 200px;      
+}
+
+#Sprache {
+    display: table-cell; width: 50%; padding: 50px
+}
+
+#lang {
+    width: 200px;
     
-        <div>
+}
+
+
+#Kategorie {
+    display: table-cell; width: 50%; padding: 50px
+}
+
+#cat {
+    width: 200px;
+        
+}
+
+
+#Stichwort {
+    display: flex;
+    justify-content: center;
+         
+}
+
+
+    #Suchen {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+</style>
+
+</head>
+
+<body>
+       <div id="Abfrage">
+
+          <div id="Sprache">
             <label>Sprache</label>
             <select id="lang" multiple>
-                <option value="de">deutsch</option>
-                <option value="en">englisch</option>
+                <option value="de">Deutsch</option>
+                <option value="en">Englisch</option>
             </select>
         </div>
-        <div>
+      
+        <div id="Kategorie">
             <label>Kategorie</label>
             <select id="cat" multiple>
                 <option value="technology">Technologie</option>
-                <option value="business">Finanzen</option>
+                <option value="business">Business</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="general">Allgemein</option>
+                <option value="health">Gesundheit</option>
+                <option value="science">Wissenschaft</option>
+                <option value="sports">Sport</option>
             </select>
         </div>
-        <div>
-            <label>Stichwort</label>
-            <input id="q">
-        </div>
-        <button onclick="getnews()">Suchen</button>
+        
+    </div>
+
+        
+    <div id="Stichwort">
+        <label>Stichwort</label>
+        <input id="q">
+    </div>
+
     
-</head>
-<body>
+    <div id="Suchen">
+        <button onclick="getnews()">Suchen</button>
+    </div>
+
     <div id="output"></div>
-</body>
+    
+    </body>
+
 
 
